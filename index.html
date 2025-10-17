@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dip Saha - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f5f5f5;
+            --accent: #888;
+            --accent-light: #b0b0b0;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary);
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2, h3 {
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            letter-spacing: -0.3px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transition: var(--transition);
+        }
+
+        section:hover h2::after {
+            width: 100px;
+        }
+
+        p {
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* Intro Section */
+        #intro {
+            text-align: center;
+            position: relative;
+            padding-top: 10rem;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-line {
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .intro-word {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            animation: slideUpFadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .intro-word:nth-child(1) { animation-delay: 0.2s; }
+        .intro-word:nth-child(2) { animation-delay: 0.4s; }
+        .intro-word:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideUpFadeIn {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-light) 0%, var(--secondary) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            padding: 0 5px;
+            animation: gradientShift 8s ease-in-out infinite, gentlePulse 4s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background: linear-gradient(120deg, var(--accent-light) 0%, var(--secondary) 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+            }
+            50% {
+                background: linear-gradient(120deg, var(--secondary) 0%, var(--accent-light) 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+            }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .intro-subtitle {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 1s forwards;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        .dot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .dot:nth-child(2) { top: 60%; left: 85%; animation-delay: 2s; }
+        .dot:nth-child(3) { top: 80%; left: 25%; animation-delay: 4s; }
+        .dot:nth-child(4) { top: 40%; left: 70%; animation-delay: 6s; }
+        .dot:nth-child(5) { top: 70%; left: 50%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-10px) translateX(20px);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateY(10px) translateX(-10px);
+                opacity: 0.5;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: bounce 2s infinite 1.5s, fadeIn 0.5s ease 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .scroll-indicator i {
+            margin-top: 5px;
+            font-size: 1.2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Interests Section */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .interest-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--soft-shadow);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .interest-card:hover::before {
+            opacity: 1;
+        }
+
+        .interest-card h3 {
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interest-card p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Link indicator for interest cards */
+        .interest-link-indicator {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition);
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .interest-card:hover .interest-link-indicator {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mobile link indicator - always visible on mobile */
+        .mobile-link-indicator {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .mobile-link-indicator i {
+            margin-left: 5px;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .mobile-link-indicator {
+                display: block;
+            }
+            
+            .interest-link-indicator {
+                display: none;
+            }
+        }
+
+        /* Thoughts Section */
+        .thoughts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .thought {
+            padding: 2rem;
+            border-left: 3px solid var(--accent);
+            background: var(--card-bg);
+            transition: var(--transition);
+            border-radius: 0 12px 12px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thought::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+            transition: var(--transition);
+        }
+
+        .thought:hover {
+            transform: translateX(10px);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .thought:hover::before {
+            width: 100%;
+        }
+
+        .thought-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Gallery Section - OPTIMIZED FOR ALL DEVICES */
+        .gallery-section {
+            padding: 6rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1 / 1;
+            min-height: 280px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: var(--soft-shadow);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.4), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.8rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .gallery-caption p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Contact Section */
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-link {
+            padding: 1rem 2rem;
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--secondary);
+            transition: var(--transition);
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 6rem 0;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .quote-section::before, .quote-section::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent);
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .quote-section::before {
+            top: 30px;
+            left: 0;
+        }
+
+        .quote-section::after {
+            bottom: 30px;
+            right: 0;
+        }
+
+        /* Now Section */
+        .now-section {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--soft-shadow);
+            transition: var(--transition);
+        }
+
+        .now-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .now-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--accent-light);
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(15px);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(26, 26, 26, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 500;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 300;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-light), var(--secondary));
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            font-weight: 300;
+            color: var(--accent);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1400px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.8rem;
+            }
+            
+            .gallery-item {
+                min-height: 260px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            h2 {
+                font-size: 2.8rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .gallery-item {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 26, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .contact-links {
+                justify-content: center;
+            }
+            
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 6rem 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .gallery-item {
+                min-height: 250px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .gallery-item {
+                min-height: 300px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .contact-link {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-item {
+                min-height: 280px;
+            }
+            
+            .gallery-caption {
+                padding: 1.5rem;
+            }
+            
+            .gallery-caption h3 {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-caption p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">Dip Saha</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#intro" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#interests" class="nav-link">Interests</a>
+                <a href="#thoughts" class="nav-link">Thoughts</a>
+                <a href="#gallery" class="nav-link">Inspiration</a>
+                <a href="#contact" class="nav-link">Connect</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="visible">
+        <div class="container">
+            <div class="intro-text">
+                <h1>
+                    <span class="intro-line">
+                        <span class="intro-word">Hey,</span>
+                        <span class="intro-word">&nbsp;I'm</span>
+                        <span class="intro-word">&nbsp;<span class="highlight">Dip</span></span>
+                    </span>
+                </h1>
+                <p class="intro-subtitle">Still figuring out life, learning, and creating along the way.</p>
+            </div>
+            <div class="floating-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About</h2>
+            <div class="about-content">
+                <p>I'm a curious soul navigating the intersections of technology, creativity, and human behavior. My journey is one of continuous exploration—questioning norms, seeking patterns, and finding meaning in the seemingly mundane.</p>
+                <p>I believe in the power of reflection as a tool for growth, and I'm constantly fascinated by how our inner worlds shape our external realities.</p>
+                
+                <!-- Now Section -->
+                <div class="now-section">
+                    <h3>Currently</h3>
+                    <p>Exploring the psychology of habit formation, learning about computational creativity, and experimenting with minimalist design principles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section id="quote">
+        <div class="container">
+            <div class="quote-section">
+                <p>"The most important kind of freedom is to be what you really are. You trade in your reality for a role. You give up your ability to feel, and in exchange, put on a mask."</p>
+                <p style="margin-top: 1.5rem; font-size: 1.1rem;">— Jim Morrison</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests">
+        <div class="container">
+            <h2>What I'm Into</h2>
+            <div class="interests-grid">
+                <a href="web-design.html" class="interest-card">
+                    <h3>Web Design</h3>
+                    <p>Crafting digital experiences that balance aesthetics with purpose.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="technology.html" class="interest-card">
+                    <h3>Technology</h3>
+                    <p>Exploring how tools shape our cognition and connection.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="self-growth.html" class="interest-card">
+                    <h3>Self-Growth</h3>
+                    <p>The ongoing journey of understanding and evolving oneself.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="learning.html" class="interest-card">
+                    <h3>Learning</h3>
+                    <p>Pursuing knowledge across disciplines to find unexpected connections.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="storytelling.html" class="interest-card">
+                    <h3>Storytelling</h3>
+                    <p>Weaving narratives that reveal deeper truths about our shared humanity.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="human-behavior.html" class="interest-card">
+                    <h3>Human Behavior</h3>
+                    <p>Observing the patterns and paradoxes that define our existence.</p>
+                    <div class="interest-link-indicator">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="mobile-link-indicator">
+                        <span>Tap to explore</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thoughts Section -->
+    <section id="thoughts">
+        <div class="container">
+            <h2>Daily Thoughts</h2>
+            <div class="thoughts-container">
+                <div class="thought">
+                    <div class="thought-date">April 12</div>
+                    <p>Clarity emerges not from having all the answers, but from asking better questions.</p>
+                </div>
+                <div class="thought">
+                    <div class="thought-date">April 8</div>
+                    <p>The most profound technologies are those that disappear. They weave themselves into the fabric of everyday life until they are indistinguishable from it.</p>
+                </div>
+                <div class="thought">
+                    <div class="thought-date">April 3</div>
+                    <p>We don't see things as they are, we see them as we are. Our perception is always filtered through our accumulated experiences and biases.</p>
+                </div>
+                <div class="thought">
+                    <div class="thought-date">March 28</div>
+                    <p>Simplicity is not the absence of complexity, but the mastery of it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section - OPTIMIZED FOR ALL DEVICES -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2>Inspiration</h2>
+            <p style="font-size: 1.3rem; max-width: none; text-align: center;">Visuals that spark creativity and reflection</p>
+            <div class="gallery-grid">
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Minimalist Design</h3>
+                        <p>Less is more - Finding beauty in simplicity</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Mountain Peaks</h3>
+                        <p>Reaching new heights in creativity</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Snowy Landscapes</h3>
+                        <p>Pure and serene moments of clarity</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Mystical Forest</h3>
+                        <p>Nature's wisdom in every branch</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1464822759844-d94c9c5625e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Northern Lights</h3>
+                        <p>Nature's magical dance in the sky</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Lakeside Calm</h3>
+                        <p>Peaceful reflections and quiet thoughts</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Alpine Majesty</h3>
+                        <p>Grandeur found in simplicity</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <div class="gallery-caption">
+                        <h3>Urban Geometry</h3>
+                        <p>Finding patterns in urban chaos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Connect</h2>
+            <p style="text-align: center; margin: 0 auto;">Feel free to reach out if our paths feel aligned.</p>
+            <div class="contact-links">
+                <a href="mailto:dip@example.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 Dip Saha</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.15, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: false },
+                move: { 
+                    enable: true, 
+                    speed: 1.5, 
+                    direction: "none", 
+                    random: true,
+                    out_mode: "out"
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { 
+                    onhover: { enable: true, mode: "repulse" }, 
+                    onclick: { enable: true, mode: "push" }, 
+                    resize: true 
+                }
+            }
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
